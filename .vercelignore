@@ -1,0 +1,13 @@
+# Vercel's CLI reads this, not .gitignore. Only site/ is served — everything else is build
+# tooling or source material and has no business being uploaded on every deploy.
+node_modules
+.git
+raw
+tools
+dist
+build-art.js
+build-standalone.js
+serve.js
+*.png
+.env
+.env.*

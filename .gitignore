@@ -1,0 +1,16 @@
+node_modules/
+.env
+.env.*
+.DS_Store
+*.log
+
+# Source screenshots: 5MB of 2880x1800 PNGs. The web-sized WebP in site/img is committed
+# instead, so a clean clone still builds and deploys without carrying the originals.
+raw/
+
+# Scratch output from the capture and preview scripts.
+preview-*.png
+demo-*.png
+bt-*.png
+ch-*.png
+bug-*.png

@@ -1,0 +1,1817 @@
+<title>UwakmfonAbasi's Portfolio</title>
+<meta name="description" content="I build systems people use — on-chain protocols, AI agents, and the software that keeps a business running.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&family=Fira+Code:wght@400;600&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400;12..96,75..100,600;12..96,75..100,800&family=DM+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ───────────────────────────────────────────────────────────────────────────
+   Tokens. Light is the bare :root — this page is light-first by choice, since
+   every developer portfolio is dark and the work screenshots carry more colour
+   against paper. Dark redefines the same names only.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  --paper:      #F1F2F0;
+  --paper-2:    #E7E9E5;
+  --card:       #FFFFFF;
+  --ink:        #14171A;
+  --ink-soft:   #4A5158;
+  --ink-faint:  #8B939B;
+  --rule:       #D6DAD5;
+  --rule-firm:  #B9BFB8;
+
+  --accent:     #1B34E8;
+  --on-accent:  #FFFFFF;
+  --accent-wash:#E4E7FD;
+
+  --live:       #0F7B3D;
+  --live-wash:  #DFF0E6;
+
+  --shadow-sm: 0 1px 2px rgba(20,23,26,.05), 0 4px 14px -8px rgba(20,23,26,.18);
+  --shadow-lg: 0 2px 6px rgba(20,23,26,.06), 0 30px 60px -30px rgba(20,23,26,.30);
+
+  --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --body: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --mono: "DM Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --s--1: clamp(.76rem, .74rem + .1vw, .82rem);
+  --s-0:  clamp(.98rem, .95rem + .15vw, 1.06rem);
+  --s-1:  clamp(1.16rem, 1.08rem + .34vw, 1.4rem);
+  --s-2:  clamp(1.5rem, 1.3rem + .9vw, 2.15rem);
+  --s-3:  clamp(2.1rem, 1.6rem + 2.4vw, 3.6rem);
+  --s-4:  clamp(3rem, 1.7rem + 6vw, 7.5rem);
+
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #0D0F12;
+    --paper-2:    #14181C;
+    --card:       #161A1F;
+    --ink:        #ECEFF2;
+    --ink-soft:   #A3ADB6;
+    --ink-faint:  #6B757E;
+    --rule:       #242A31;
+    --rule-firm:  #38404A;
+
+    --accent:     #7C8CFF;
+    --on-accent:  #0A0C10;
+    --accent-wash:#1A2040;
+
+    --live:       #4ADE80;
+    --live-wash:  #10281A;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.5), 0 4px 14px -8px rgba(0,0,0,.7);
+    --shadow-lg: 0 2px 6px rgba(0,0,0,.5), 0 30px 60px -30px rgba(0,0,0,.9);
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper:      #0D0F12;
+  --paper-2:    #14181C;
+  --card:       #161A1F;
+  --ink:        #ECEFF2;
+  --ink-soft:   #A3ADB6;
+  --ink-faint:  #6B757E;
+  --rule:       #242A31;
+  --rule-firm:  #38404A;
+
+  --accent:     #7C8CFF;
+  --on-accent:  #0A0C10;
+  --accent-wash:#1A2040;
+
+  --live:       #4ADE80;
+  --live-wash:  #10281A;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.5), 0 4px 14px -8px rgba(0,0,0,.7);
+  --shadow-lg: 0 2px 6px rgba(0,0,0,.5), 0 30px 60px -30px rgba(0,0,0,.9);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--s-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 800; text-wrap: balance; line-height: .95; letter-spacing: -.03em; }
+p { margin: 0; }
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { width: min(1240px, 100% - var(--gutter) * 2); margin-inline: auto; }
+
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--s--1);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ── Top bar ─────────────────────────────────────────────────────────────── */
+.top {
+  position: fixed; inset: 0 0 auto 0; z-index: 60;
+  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s;
+}
+.top.stuck { border-bottom-color: var(--rule); }
+.top .wrap { display: flex; align-items: center; gap: 1.5rem; height: 64px; }
+.sig {
+  font-family: var(--display); font-weight: 800; font-size: 1.05rem;
+  letter-spacing: -.02em; margin-right: auto;
+  font-variation-settings: "wdth" 100;
+}
+.sig span { color: var(--accent); }
+.theme-btn {
+  font: inherit; font-family: var(--mono); font-size: var(--s--1);
+  background: none; border: 1px solid var(--rule-firm); color: var(--ink-soft);
+  padding: .3rem .6rem; border-radius: 2px; cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.hero { padding: clamp(6.5rem, 14vh, 9.5rem) 0 clamp(2rem, 4vw, 3.5rem); }
+
+.figures {
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+}
+@media (max-width: 720px) { .figures { grid-template-columns: repeat(2, 1fr); } }
+.figures div {
+  padding: 1.1rem 1.2rem 1.1rem 0;
+  display: flex; flex-direction: column; gap: .1rem;
+  border-right: 1px solid var(--rule);
+}
+.figures div:last-child { border-right: 0; }
+@media (max-width: 720px) {
+  .figures div:nth-child(2n) { border-right: 0; }
+  .figures div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+}
+.figures b {
+  font-family: var(--display); font-weight: 800; font-size: var(--s-2);
+  font-variation-settings: "wdth" 88; letter-spacing: -.02em; line-height: 1;
+}
+.figures span { font-family: var(--mono); font-size: var(--s--1); color: var(--ink-faint); }
+
+.hero h1 {
+  font-size: var(--s-4);
+  font-variation-settings: "wdth" 100, "opsz" 96;
+  margin: 0;
+}
+/* The one flourish: the display face's width axis resolves on load. It shows
+   typographic control rather than claiming it, and it happens once. */
+.hero h1 .act-line {
+  display: block;
+  font-variation-settings: "wdth" 75, "opsz" 96;
+  opacity: 0;
+  transform: translateY(.18em);
+  animation: settle 1.1s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero h1 .line:nth-child(2) { animation-delay: .12s; }
+.hero h1 .line em { font-style: normal; color: var(--accent); }
+
+@keyframes settle {
+  to { font-variation-settings: "wdth" 100, "opsz" 96; opacity: 1; transform: none; }
+}
+
+.hero-foot {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2rem 3rem;
+  align-items: end; padding-top: 1.5rem; border-top: 1px solid var(--rule);
+}
+@media (max-width: 820px) { .hero-foot { grid-template-columns: 1fr; align-items: start; } }
+.hero-foot p { max-width: 46ch; color: var(--ink-soft); font-size: var(--s-1); line-height: 1.5; }
+
+.links { display: flex; gap: .6rem; flex-wrap: wrap; }
+.chip {
+  font-family: var(--mono); font-size: var(--s--1);
+  text-decoration: none; padding: .5rem .85rem;
+  border: 1px solid var(--rule-firm); border-radius: 2px;
+  display: inline-flex; align-items: center; gap: .45rem;
+  transition: background .2s, color .2s, border-color .2s, transform .15s;
+  white-space: nowrap;
+}
+.chip:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); transform: translateY(-2px); }
+.chip.solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip.solid:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+/* ── Section scaffolding ─────────────────────────────────────────────────── */
+section { padding: clamp(3rem, 6.5vw, 5.5rem) 0; scroll-margin-top: 84px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: clamp(2rem, 4vw, 3rem); flex-wrap: wrap; }
+.sec-head h2 { font-size: var(--s-3); font-variation-settings: "wdth" 92; }
+.sec-head .count { font-family: var(--mono); font-size: var(--s--1); color: var(--ink-faint); }
+
+/* ── Carousel ────────────────────────────────────────────────────────────── */
+.rail { position: relative; }
+.viewport { overflow: hidden; border-radius: 6px; }
+.track { display: flex; transition: transform .62s cubic-bezier(.22,1,.36,1); will-change: transform; }
+.track.dragging { transition: none; }
+
+.slide { min-width: 100%; }
+.slide-inner {
+  display: grid; grid-template-columns: 1.35fr .65fr;
+  background: var(--card); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+@media (max-width: 940px) { .slide-inner { grid-template-columns: 1fr; } }
+
+.shot { position: relative; overflow: hidden; background: var(--paper-2); aspect-ratio: 16/10; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; transition: transform 1.2s cubic-bezier(.22,1,.36,1); }
+.slide-inner:hover .shot img { transform: scale(1.03); }
+
+.meta { padding: clamp(1.5rem, 2.5vw, 2.25rem); display: flex; flex-direction: column; gap: 1rem; }
+.meta h3 { font-size: var(--s-2); font-variation-settings: "wdth" 90; }
+.meta .blurb { color: var(--ink-soft); font-size: var(--s-0); }
+
+.spec { display: grid; gap: .5rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--rule); }
+.spec div { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: var(--s--1); }
+.spec dt, .spec .k { color: var(--ink-faint); }
+.spec .v { color: var(--ink); text-align: right; }
+
+.tag-live {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--live); background: var(--live-wash);
+  border: 1px solid color-mix(in srgb, var(--live) 35%, transparent);
+  padding: .18rem .5rem; border-radius: 2px;
+  display: inline-flex; align-items: center; gap: .4rem; align-self: flex-start;
+}
+.tag-live::before { content: ""; width: 5px; height: 5px; border-radius: 99px; background: var(--live); }
+
+.rail-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; }
+.dots { display: flex; gap: .45rem; }
+.dots button {
+  width: 26px; height: 3px; padding: 0; border: 0; cursor: pointer;
+  background: var(--rule-firm); border-radius: 99px; transition: background .3s, width .3s;
+}
+.dots button[aria-current="true"] { background: var(--accent); width: 42px; }
+.arrows { display: flex; gap: .5rem; }
+.arrows button {
+  width: 38px; height: 38px; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--rule-firm); background: transparent; color: var(--ink);
+  display: grid; place-items: center; transition: background .2s, color .2s, border-color .2s;
+}
+.arrows button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.arrows svg { width: 15px; height: 15px; }
+
+/* ── Work grid ───────────────────────────────────────────────────────────── */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+@media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 660px) { .grid { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--rule-firm); }
+.card .shot { aspect-ratio: 16/10; }
+.card-body { padding: 1.25rem; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
+.card-body h3 { font-size: var(--s-1); font-variation-settings: "wdth" 92; }
+.card-body p { color: var(--ink-soft); font-size: var(--s--1); }
+.stack { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: auto; padding-top: .75rem; }
+.stack span {
+  font-family: var(--mono); font-size: .68rem; color: var(--ink-faint);
+  border: 1px solid var(--rule); padding: .15rem .45rem; border-radius: 2px;
+}
+
+/* ── Practice strip ──────────────────────────────────────────────────────── */
+.practice { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+@media (max-width: 760px) { .practice { grid-template-columns: 1fr; } }
+.pract {
+  border: 1px solid var(--rule); border-radius: 6px; padding: 1.4rem;
+  background: var(--card); transition: border-color .3s, transform .3s;
+}
+.pract:hover { border-color: var(--accent); transform: translateY(-3px); }
+.pract h3 { font-size: var(--s-1); font-variation-settings: "wdth" 92; margin-bottom: .5rem; }
+.pract p { color: var(--ink-soft); font-size: var(--s--1); }
+.pract .stack { padding-top: 1rem; }
+
+/* ── Contact ─────────────────────────────────────────────────────────────── */
+.contact { border-top: 1px solid var(--rule); }
+.contact-in { display: grid; grid-template-columns: 1fr auto; gap: 2rem 3rem; align-items: end; }
+@media (max-width: 820px) { .contact-in { grid-template-columns: 1fr; align-items: start; } }
+.contact h2 { font-size: var(--s-3); font-variation-settings: "wdth" 92; }
+.contact p { color: var(--ink-soft); margin-top: .9rem; max-width: 44ch; }
+
+footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
+.foot { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; font-family: var(--mono); font-size: var(--s--1); color: var(--ink-faint); }
+
+/* ── Scroll reveal ───────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── Watch it work ───────────────────────────────────────────────────────── */
+.stage {
+  display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: clamp(1rem, 2vw, 1.5rem); align-items: stretch;
+}
+@media (max-width: 900px) { .stage { grid-template-columns: 1fr; } }
+
+/* the conversation */
+.phone {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 6px;
+  display: flex; flex-direction: column; overflow: hidden; min-height: 460px;
+  box-shadow: var(--shadow-sm);
+}
+.phone-top {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .8rem 1rem; border-bottom: 1px solid var(--rule); background: var(--paper-2);
+}
+.phone-top b { display: block; font-family: var(--body); font-size: var(--s-0); font-weight: 600; }
+.phone-top span { font-family: var(--mono); font-size: .7rem; color: var(--ink-faint); }
+.avatar {
+  width: 34px; height: 34px; border-radius: 99px; display: grid; place-items: center;
+  background: var(--accent); color: var(--on-accent);
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .02em;
+}
+
+.thread {
+  flex: 1; padding: 1rem; display: flex; flex-direction: column; gap: .55rem;
+  overflow-y: auto; max-height: 380px;
+}
+.thread-empty { color: var(--ink-faint); font-size: var(--s--1); margin: auto; text-align: center; }
+
+.msg {
+  max-width: 82%; padding: .55rem .8rem; border-radius: 12px;
+  font-size: var(--s--1); line-height: 1.45;
+  animation: pop .32s cubic-bezier(.16,1,.3,1) both;
+}
+.msg.them { align-self: flex-start; background: var(--paper-2); border-bottom-left-radius: 3px; }
+.msg.bot  { align-self: flex-end; background: var(--accent); color: var(--on-accent); border-bottom-right-radius: 3px; }
+.msg.owner{
+  align-self: flex-end; background: transparent; color: var(--ink);
+  border: 1px dashed var(--rule-firm); border-bottom-right-radius: 3px;
+}
+.msg .who {
+  display: block; font-family: var(--mono); font-size: .6rem; letter-spacing: .1em;
+  text-transform: uppercase; opacity: .65; margin-bottom: .2rem;
+}
+
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+
+.typing { display: inline-flex; gap: 3px; align-items: center; }
+.typing i { width: 5px; height: 5px; border-radius: 99px; background: currentColor; opacity: .45; animation: blinkdot 1.1s infinite; }
+.typing i:nth-child(2) { animation-delay: .18s; }
+.typing i:nth-child(3) { animation-delay: .36s; }
+@keyframes blinkdot { 0%,60%,100% { opacity:.25 } 30% { opacity:.9 } }
+
+.composer {
+  display: flex; gap: .5rem; align-items: center;
+  padding: .7rem 1rem; border-top: 1px solid var(--rule); background: var(--paper-2);
+}
+.fake-input {
+  flex: 1; min-height: 34px; display: flex; align-items: center;
+  padding: .35rem .7rem; border-radius: 99px; background: var(--card);
+  border: 1px solid var(--rule); font-size: var(--s--1); color: var(--ink);
+}
+.send {
+  width: 34px; height: 34px; flex: none; border: 0; border-radius: 99px; cursor: default;
+  background: var(--rule); color: var(--ink-faint); display: grid; place-items: center;
+}
+.send svg { width: 15px; height: 15px; }
+.caret { display: inline-block; width: 2px; height: 1em; background: var(--accent); animation: blink 1s steps(1) infinite; vertical-align: -2px; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* what the system does about it */
+.console {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 6px;
+  display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.console-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .8rem 1.1rem; border-bottom: 1px solid var(--rule);
+}
+.console-head .mono { font-size: .72rem; color: var(--ink-faint); }
+
+.ticket { padding: 1rem 1.1rem; border-bottom: 1px solid var(--rule); display: grid; gap: .45rem; }
+.ticket-row { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+.ticket-row span { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); }
+.ticket-row b {
+  font-family: var(--mono); font-size: var(--s--1); font-weight: 500;
+  font-variant-numeric: tabular-nums; text-align: right;
+}
+.ticket-row b.set { animation: land .45s cubic-bezier(.16,1,.3,1) both; color: var(--ink); }
+.ticket-row.total { border-top: 1px solid var(--rule); padding-top: .55rem; margin-top: .15rem; }
+.ticket-row.total b { font-size: var(--s-1); font-family: var(--display); font-weight: 800; font-variation-settings: "wdth" 88; }
+@keyframes land { from { opacity: 0; transform: translateX(8px); } }
+
+.feed { flex: 1; padding: .9rem 1.1rem; display: flex; flex-direction: column; gap: .5rem; overflow-y: auto; max-height: 210px; }
+.act-line {
+  display: grid; grid-template-columns: auto 1fr auto; gap: .6rem; align-items: baseline;
+  font-size: var(--s--1); animation: pop .3s cubic-bezier(.16,1,.3,1) both;
+}
+.act-line .dot { width: 6px; height: 6px; border-radius: 99px; background: var(--accent); margin-top: .45em; }
+.act-line.warn .dot { background: #C2410C; }
+.act-line.hold .dot { background: var(--ink-faint); }
+.act-line time { font-family: var(--mono); font-size: .68rem; color: var(--ink-faint); }
+.act-line b { font-weight: 600; }
+
+.chip[disabled] { opacity: .55; cursor: not-allowed; transform: none; }
+
+
+/* ── Demo slides ─────────────────────────────────────────────────────────── */
+.demo-slide {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 6px;
+  padding: clamp(1.1rem, 2vw, 1.6rem); box-shadow: var(--shadow-lg);
+  display: grid; gap: clamp(1rem, 2vw, 1.4rem);
+}
+.demo-head {
+  display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 1rem 2rem; align-items: start;
+}
+@media (max-width: 820px) { .demo-head { grid-template-columns: 1fr; } }
+.demo-head h3 { font-size: var(--s-2); font-variation-settings: "wdth" 90; }
+.demo-head p { margin-top: .7rem; color: var(--ink-soft); font-size: var(--s--1); max-width: 62ch; line-height: 1.6; }
+.demo-ctl { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.demo-ctl .mono { font-size: .72rem; color: var(--ink-faint); }
+
+/* Inside a slide the panels sit flush; the slide itself carries the frame. */
+.demo-slide .phone,
+.demo-slide .console { box-shadow: none; }
+.demo-slide .phone { min-height: 400px; }
+.demo-slide .thread { max-height: 320px; }
+.demo-slide .feed { max-height: 180px; }
+
+/* ── Business Tracker, recreated ──────────────────────────────────────────────
+   A faithful rebuild of the real app's interface, using its own tokens rather than the
+   portfolio's: blue #1e40af on #f8fafc, Fira Sans and Fira Code, 8px radii. It sits inside the
+   portfolio but should not look like it — the point is to show the actual product.
+
+   Every class is bt- prefixed and scoped under .bt-app. A generic `.line` class in one component
+   already silently rewrote the page's headline once; that will not happen twice. */
+.bt-app {
+  --bt-bg: #f8fafc;
+  --bt-panel: #ffffff;
+  --bt-border: #dbeafe;
+  --bt-border-2: #c7dbfd;
+  --bt-text: #0f172a;
+  --bt-head: #1e3a8a;
+  --bt-muted: #475569;
+  --bt-accent: #1e40af;
+  --bt-soft: #eff5ff;
+  --bt-good: #15803d;
+  --bt-good-soft: #dcfce7;
+  --bt-warn: #b45309;
+  --bt-bad: #dc2626;
+
+  --bt-sans: "Fira Sans", ui-sans-serif, system-ui, sans-serif;
+  --bt-mono: "Fira Code", ui-monospace, Consolas, monospace;
+
+  font-family: var(--bt-sans);
+  color: var(--bt-text);
+  background: var(--bt-bg);
+  border: 1px solid var(--bt-border-2);
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  min-height: 470px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+@media (max-width: 860px) { .bt-app { grid-template-columns: 1fr; min-height: 0; } }
+
+/* chat side */
+.bt-chat { border-right: 1px solid var(--bt-border); display: flex; flex-direction: column; background: var(--bt-panel); }
+@media (max-width: 860px) { .bt-chat { border-right: 0; border-bottom: 1px solid var(--bt-border); } }
+.bt-chat-head { padding: 12px 14px; border-bottom: 1px solid var(--bt-border); }
+.bt-chat-head b { color: var(--bt-head); font-size: 15px; font-weight: 600; display: block; }
+.bt-chat-head span { color: var(--bt-muted); font-size: 11px; }
+.bt-log { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 300px; }
+.bt-msg {
+  max-width: 92%; padding: 8px 10px; border-radius: 8px; font-size: 12.5px;
+  animation: bt-pop .3s cubic-bezier(.16,1,.3,1) both;
+}
+.bt-msg.bt-bot { align-self: flex-start; background: var(--bt-soft); border: 1px solid var(--bt-border); }
+.bt-msg.bt-me { align-self: flex-end; background: var(--bt-accent); color: #fff; }
+@keyframes bt-pop { from { opacity: 0; transform: translateY(6px); } }
+.bt-composer { display: flex; gap: 6px; padding: 10px 12px; border-top: 1px solid var(--bt-border); }
+.bt-input {
+  flex: 1; min-height: 30px; display: flex; align-items: center; padding: 4px 9px;
+  border: 1px solid var(--bt-border-2); border-radius: 6px; background: #fff;
+  font-size: 12px; color: var(--bt-text); font-family: var(--bt-sans);
+}
+.bt-send {
+  border: 0; background: var(--bt-accent); color: #fff; border-radius: 6px;
+  padding: 0 12px; font-family: var(--bt-sans); font-size: 12px; font-weight: 600; cursor: default;
+}
+.bt-caret { display: inline-block; width: 2px; height: 1em; background: var(--bt-accent); animation: bt-blink 1s steps(1) infinite; }
+@keyframes bt-blink { 50% { opacity: 0; } }
+
+/* content side */
+.bt-main { display: flex; flex-direction: column; min-width: 0; }
+.bt-tabs { display: flex; gap: 2px; padding: 8px 12px 0; border-bottom: 1px solid var(--bt-border); overflow-x: auto; }
+.bt-tab {
+  border: 0; background: none; font-family: var(--bt-sans); font-size: 12.5px; color: var(--bt-muted);
+  padding: 8px 11px; border-bottom: 2px solid transparent; cursor: default; white-space: nowrap;
+  transition: color .2s, border-color .2s;
+}
+.bt-tab[aria-selected="true"] { color: var(--bt-accent); border-bottom-color: var(--bt-accent); font-weight: 600; }
+.bt-body { padding: 14px; overflow-y: auto; flex: 1; max-height: 380px; }
+.bt-pane { display: none; }
+.bt-pane.bt-on { display: block; animation: bt-fade .35s ease both; }
+@keyframes bt-fade { from { opacity: 0; transform: translateY(6px); } }
+
+.bt-h { color: var(--bt-head); font-size: 15px; font-weight: 600; margin: 0 0 10px; font-family: var(--bt-sans); }
+
+/* stats */
+.bt-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media (max-width: 620px) { .bt-stats { grid-template-columns: repeat(2, 1fr); } }
+.bt-stat { background: var(--bt-panel); border: 1px solid var(--bt-border); border-radius: 8px; padding: 10px 11px; }
+.bt-stat span { display: block; font-size: 9.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--bt-muted); }
+.bt-stat b { display: block; font-family: var(--bt-mono); font-size: 15px; color: var(--bt-accent); margin-top: 3px; font-variant-numeric: tabular-nums; }
+.bt-stat.bt-profit b { color: var(--bt-good); }
+.bt-stat b.bt-bump { animation: bt-bump .5s cubic-bezier(.16,1,.3,1) both; }
+@keyframes bt-bump { 0% { opacity:.3; transform: translateY(-4px) } 100% { opacity:1; transform:none } }
+
+/* tables */
+.bt-card { background: var(--bt-panel); border: 1px solid var(--bt-border); border-radius: 8px; overflow: hidden; }
+.bt-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.bt-table th {
+  text-align: left; padding: 8px 11px; background: var(--bt-soft); color: var(--bt-muted);
+  font-size: 9.5px; letter-spacing: .07em; text-transform: uppercase; font-weight: 600;
+  border-bottom: 1px solid var(--bt-border);
+}
+.bt-table td { padding: 9px 11px; border-bottom: 1px solid var(--bt-border); }
+.bt-table tr:last-child td { border-bottom: 0; }
+.bt-table td.bt-n { font-family: var(--bt-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.bt-table tr.bt-new { animation: bt-row .45s cubic-bezier(.16,1,.3,1) both; }
+@keyframes bt-row { from { opacity: 0; transform: translateX(-10px); background: var(--bt-good-soft); } }
+.bt-qty { font-family: var(--bt-mono); font-weight: 600; }
+.bt-qty.bt-drop { animation: bt-drop .7s cubic-bezier(.16,1,.3,1) both; }
+@keyframes bt-drop {
+  0% { color: var(--bt-bad); transform: scale(1.25); }
+  100% { color: inherit; transform: none; }
+}
+.bt-empty { padding: 26px 12px; text-align: center; color: var(--bt-muted); font-size: 12px; }
+
+/* receipt */
+.bt-receipt {
+  background: #fff; border: 1px solid var(--bt-border-2); border-radius: 8px;
+  padding: 16px; max-width: 340px; margin: 0 auto; font-family: var(--bt-mono); font-size: 11.5px;
+  animation: bt-receipt .5s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes bt-receipt { from { opacity: 0; transform: translateY(12px) rotate(-.6deg); } }
+.bt-receipt h4 { margin: 0 0 2px; font-family: var(--bt-sans); font-size: 14px; color: var(--bt-head); text-align: center; }
+.bt-receipt .bt-r-sub { text-align: center; color: var(--bt-muted); font-size: 10px; margin-bottom: 12px; }
+.bt-r-row { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; }
+.bt-r-rule { border-top: 1px dashed var(--bt-border-2); margin: 8px 0; }
+.bt-r-total { font-weight: 600; font-size: 13px; color: var(--bt-head); }
+.bt-r-foot { text-align: center; color: var(--bt-muted); font-size: 10px; margin-top: 12px; }
+
+/* the little status strip under the app */
+.bt-status {
+  display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+  border-top: 1px solid var(--bt-border); background: var(--bt-panel);
+  font-family: var(--bt-mono); font-size: 10.5px; color: var(--bt-muted);
+}
+.bt-status i { width: 6px; height: 6px; border-radius: 99px; background: var(--bt-good); flex: none; }
+
+
+/* ── Chapter strip ───────────────────────────────────────────────────────── */
+.chapters { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.1rem; }
+.chapter {
+  font: inherit; font-family: var(--mono); font-size: .72rem;
+  display: inline-flex; align-items: baseline; gap: .45rem;
+  padding: .4rem .7rem; cursor: pointer;
+  background: transparent; color: var(--ink-faint);
+  border: 1px solid var(--rule); border-radius: 3px;
+  transition: color .25s, border-color .25s, background .25s;
+}
+.chapter i { font-style: normal; opacity: .6; font-size: .66rem; }
+.chapter:hover { color: var(--ink); border-color: var(--rule-firm); }
+.chapter[aria-current="true"] {
+  color: var(--accent); border-color: var(--accent); background: var(--accent-wash);
+}
+.chapter[aria-current="true"] i { opacity: 1; }
+
+/* Replaying a chapter rebuilds earlier state instantly; those elements must not animate in. */
+.no-anim { animation: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  .hero h1 .act-line { opacity: 1; transform: none; font-variation-settings: "wdth" 100, "opsz" 96; }
+  .track { transition: none !important; }
+}
+</style>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <span class="sig">Uwakmfon<span>Abasi</span>'s Portfolio</span>
+    <a class="chip" href="mailto:etteuwakmfonabasi46@gmail.com">Email</a>
+    <button class="theme-btn" id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO ───────────────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="wrap">
+      <h1>
+        <span class="line">I build systems</span>
+        <span class="line"><em>people use.</em></span>
+      </h1>
+
+      <div class="hero-foot">
+        <p>
+          On-chain protocols, AI agents that answer real customers, and the unglamorous software
+          that keeps a business running. Three of them are live right now — the links are below,
+          not screenshots of something that used to work.
+        </p>
+        <div class="links">
+          <a class="chip solid" href="mailto:etteuwakmfonabasi46@gmail.com">Email me</a>
+          <a class="chip" href="https://github.com/UwakmfonEtte" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="figures">
+        <div><b>03</b><span>live in production</span></div>
+        <div><b>06</b><span>systems shipped</span></div>
+        <div><b>04</b><span>chains &amp; platforms</span></div>
+        <div><b>2026</b><span>year of build</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHIPPED ────────────────────────────────────────────────────────── -->
+  <section id="shipped">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">Live in production</span>
+          <h2 style="margin-top:.6rem">Shipped and running.</h2>
+        </div>
+        <span class="count mono">03 products · on-chain</span>
+      </div>
+
+      <div class="rail reveal" id="rail">
+        <div class="viewport" id="viewport">
+          <div class="track" id="track">
+
+            <article class="slide">
+              <div class="slide-inner">
+                <div class="shot">
+                  <img src="img/kake.webp" alt="Kake — NFT prediction markets, showing eleven live markets with floor prices and pump/dump pools" loading="eager" decoding="async">
+                </div>
+                <div class="meta">
+                  <span class="tag-live">Live</span>
+                  <h3>Kake</h3>
+                  <p class="blurb">
+                    A prediction market for NFT floor prices. Traders back a collection to pump or
+                    dump over a window; parimutuel pools settle the payout. Eleven markets are
+                    open as of this writing.
+                  </p>
+                  <div class="spec">
+                    <div><span class="k">Chain</span><span class="v">Robinhood Chain</span></div>
+                    <div><span class="k">Commits</span><span class="v">360</span></div>
+                    <div><span class="k">Built over</span><span class="v">Mar — Aug 2026</span></div>
+                    <div><span class="k">Started on</span><span class="v">Base Sepolia</span></div>
+                  </div>
+                  <div class="links" style="margin-top:1rem">
+                    <a class="chip solid" href="https://kakenft.bet/markets" target="_blank" rel="noopener">kakenft.bet ↗</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide">
+              <div class="slide-inner">
+                <div class="shot">
+                  <img src="img/kinsman.webp" alt="Kinsman — the Kin Declaration landing page" loading="lazy" decoding="async">
+                </div>
+                <div class="meta">
+                  <span class="tag-live">Live</span>
+                  <h3>Kinsman</h3>
+                  <p class="blurb">
+                    An NFT collection and the infrastructure around it. The centrepiece is a
+                    cross-chain bridge that moves up to fifty tokens between Ethereum and
+                    Robinhood Chain in one LayerZero message — lock on one side, mint on the
+                    other, with the same token IDs and artwork on both.
+                  </p>
+                  <div class="spec">
+                    <div><span class="k">Chains</span><span class="v">Ethereum ↔ Robinhood</span></div>
+                    <div><span class="k">Commits</span><span class="v">111</span></div>
+                    <div><span class="k">Bridge</span><span class="v">LayerZero V2, batched</span></div>
+                  </div>
+                  <div class="links" style="margin-top:1rem">
+                    <a class="chip solid" href="https://www.kinsman.live/" target="_blank" rel="noopener">kinsman.live ↗</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide">
+              <div class="slide-inner">
+                <div class="shot">
+                  <img src="img/hood.webp" alt="Hood Bunnies — the lending desk, showing treasury balance and a loan quote" loading="lazy" decoding="async">
+                </div>
+                <div class="meta">
+                  <span class="tag-live">Live</span>
+                  <h3>Hood Bunnies</h3>
+                  <p class="blurb">
+                    Borrow against an NFT without selling it. Secondary-sale royalties capitalise a
+                    treasury that lends them back to holders. The contract has no function that can
+                    move a borrower's collateral — the guarantee is the absence of the code.
+                  </p>
+                  <div class="spec">
+                    <div><span class="k">Chain</span><span class="v">Robinhood Chain</span></div>
+                    <div><span class="k">Contracts</span><span class="v">Solidity · 74 tests</span></div>
+                    <div><span class="k">Terms</span><span class="v">70% LTV, 3–90 days</span></div>
+                  </div>
+                  <div class="links" style="margin-top:1rem">
+                    <a class="chip solid" href="https://hoodbunnies.vercel.app/" target="_blank" rel="noopener">hoodbunnies.vercel.app ↗</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="rail-foot">
+          <div class="dots" id="dots" role="tablist" aria-label="Choose a project"></div>
+          <div class="arrows">
+            <button id="prev" type="button" aria-label="Previous project">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <button id="next" type="button" aria-label="Next project">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR BUSINESSES ─────────────────────────────────────────────────── -->
+  <section id="business">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">Built for people who aren't developers</span>
+          <h2 style="margin-top:.6rem">Software that has to work<br>on a Tuesday.</h2>
+        </div>
+        <span class="count mono">03 systems · watch them run</span>
+      </div>
+
+      <p class="reveal" style="max-width:62ch;color:var(--ink-soft);margin-bottom:2rem">
+        These three are in use by real businesses, so there is no public link to hand you. Instead,
+        here is each one actually running. Press play — or just watch.
+      </p>
+
+      <div class="rail reveal" id="demos">
+        <div class="viewport">
+          <div class="track" id="demo-track">
+
+            <article class="slide">
+              <div class="demo-slide" data-demo="fonz">
+                <div class="demo-head">
+                  <div>
+                    <h3>Fonz Naturals</h3>
+                    <p>
+                      A shop with no website, run entirely from WhatsApp. The assistant greets
+                      customers, quotes from the live price list and takes made-to-order orders —
+                      then gets out of the way the moment the owner starts typing, and picks the
+                      thread back up if she goes quiet.
+                    </p>
+                  </div>
+                  <div class="demo-ctl">
+                    <button class="chip solid js-play" type="button"><span class="js-play-label">Play</span></button>
+                    <button class="chip js-reset" type="button">Reset</button>
+                    <span class="mono js-status">Ready</span>
+                  </div>
+                </div>
+
+                <div class="stage">
+                  <div class="phone">
+                    <div class="phone-top">
+                      <div class="avatar">FN</div>
+                      <div><b>Fonz Naturals</b><span class="js-presence">Assistant · online</span></div>
+                    </div>
+                    <div class="thread"><p class="thread-empty">Press play to run it.</p></div>
+                    <div class="composer">
+                      <div class="fake-input"><span class="caret"></span></div>
+                      <button class="send" type="button" aria-hidden="true" tabindex="-1">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12l16-8-6 8 6 8z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="console">
+                    <div class="console-head">
+                      <span class="eyebrow">The order it built</span>
+                      <span class="mono js-count">0 actions</span>
+                    </div>
+                    <div class="ticket">
+                      <div class="ticket-row"><span>Customer</span><b data-field="a">—</b></div>
+                      <div class="ticket-row"><span>Item</span><b data-field="b">—</b></div>
+                      <div class="ticket-row"><span>Quantity</span><b data-field="c">—</b></div>
+                      <div class="ticket-row"><span>Delivery</span><b data-field="d">—</b></div>
+                      <div class="ticket-row total"><span>Order total</span><b data-field="e">—</b></div>
+                    </div>
+                    <div class="feed"><p class="thread-empty">Nothing yet.</p></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide">
+              <div class="demo-slide" data-demo="tracker">
+                <div class="demo-head">
+                  <div>
+                    <h3>Business Ops Tracker</h3>
+                    <p>
+                      A gadget shop's whole operation, run by typing ordinary sentences instead of
+                      filling a spreadsheet. It keeps the stock count honest, works out the margin,
+                      issues receipts, and can answer how the month is going. It keeps working
+                      through a power cut, because the shop cannot stop selling when the lights go.
+                    </p>
+                  </div>
+                  <div class="demo-ctl">
+                    <button class="chip solid js-play" type="button"><span class="js-play-label">Play</span></button>
+                    <button class="chip js-reset" type="button">Reset</button>
+                    <span class="mono js-status">Ready</span>
+                  </div>
+                </div>
+
+                                <div class="bt-app" id="bt">
+                  <div class="bt-chat">
+                    <div class="bt-chat-head">
+                      <b>Business Tracker</b>
+                      <span>Signed in as Owner · Havilah Gadgets</span>
+                    </div>
+                    <div class="bt-log" id="bt-log"></div>
+                    <div class="bt-composer">
+                      <div class="bt-input" id="bt-input"><span class="bt-caret"></span></div>
+                      <button class="bt-send" type="button" aria-hidden="true" tabindex="-1">Send</button>
+                    </div>
+                  </div>
+
+                  <div class="bt-main">
+                    <div class="bt-tabs" role="tablist">
+                      <button class="bt-tab" role="tab" data-pane="overview" aria-selected="false" tabindex="-1">Overview</button>
+                      <button class="bt-tab" role="tab" data-pane="inventory" aria-selected="true" tabindex="-1">Inventory</button>
+                      <button class="bt-tab" role="tab" data-pane="sales" aria-selected="false" tabindex="-1">Sales</button>
+                      <button class="bt-tab" role="tab" data-pane="expenses" aria-selected="false" tabindex="-1">Expenses</button>
+                      <button class="bt-tab" role="tab" data-pane="receipts" aria-selected="false" tabindex="-1">Receipts</button>
+                    </div>
+
+                    <div class="bt-body">
+                      <div class="bt-pane" data-pane="overview">
+                        <h3 class="bt-h">Monthly Performance — September 2026</h3>
+                        <div class="bt-stats">
+                          <div class="bt-stat"><span>Revenue</span><b data-stat="revenue">₦0</b></div>
+                          <div class="bt-stat"><span>Cost of goods</span><b data-stat="cogs">₦0</b></div>
+                          <div class="bt-stat"><span>Expenses</span><b data-stat="expenses">₦0</b></div>
+                          <div class="bt-stat bt-profit"><span>Net profit</span><b data-stat="profit">₦0</b></div>
+                          <div class="bt-stat"><span>Units sold</span><b data-stat="units">0</b></div>
+                          <div class="bt-stat"><span>Stock value</span><b data-stat="stock">₦0</b></div>
+                        </div>
+                      </div>
+
+                      <div class="bt-pane bt-on" data-pane="inventory">
+                        <h3 class="bt-h">Inventory</h3>
+                        <div class="bt-card">
+                          <table class="bt-table">
+                            <thead>
+                              <tr><th>Product</th><th>Cost</th><th>Price</th><th style="text-align:right">In stock</th></tr>
+                            </thead>
+                            <tbody id="bt-inv">
+                              <tr><td colspan="4" class="bt-empty">Nothing in stock yet.</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <div class="bt-pane" data-pane="sales">
+                        <h3 class="bt-h">Sales</h3>
+                        <div class="bt-card">
+                          <table class="bt-table">
+                            <thead>
+                              <tr><th>Product</th><th>Customer</th><th style="text-align:right">Qty</th><th style="text-align:right">Total</th></tr>
+                            </thead>
+                            <tbody id="bt-sales">
+                              <tr><td colspan="4" class="bt-empty">No sales recorded yet.</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <div class="bt-pane" data-pane="expenses">
+                        <h3 class="bt-h">Expenses</h3>
+                        <div class="bt-card">
+                          <table class="bt-table">
+                            <thead><tr><th>What</th><th>When</th><th style="text-align:right">Amount</th></tr></thead>
+                            <tbody id="bt-exp">
+                              <tr><td colspan="3" class="bt-empty">No expenses recorded yet.</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <div class="bt-pane" data-pane="receipts">
+                        <h3 class="bt-h">Receipts</h3>
+                        <div id="bt-receipts">
+                          <div class="bt-empty">No receipts yet.</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="bt-status"><i></i><span id="bt-status">Ready — running locally, no internet needed</span></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide">
+              <div class="demo-slide" data-demo="enwongo">
+                <div class="demo-head">
+                  <div>
+                    <h3>Enwongo-Abasi Front Desk</h3>
+                    <p>
+                      A medical centre's front desk, on the WhatsApp number patients already use.
+                      It takes bookings across two branches against a live calendar and holds the
+                      slot. When a question turns clinical it refuses to answer and puts a nurse on
+                      it instead — the judgment that makes it safe to leave running.
+                    </p>
+                  </div>
+                  <div class="demo-ctl">
+                    <button class="chip solid js-play" type="button"><span class="js-play-label">Play</span></button>
+                    <button class="chip js-reset" type="button">Reset</button>
+                    <span class="mono js-status">Ready</span>
+                  </div>
+                </div>
+
+                <div class="stage">
+                  <div class="phone">
+                    <div class="phone-top">
+                      <div class="avatar">EA</div>
+                      <div><b>Enwongo-Abasi Medical Centre</b><span class="js-presence">Front desk · online</span></div>
+                    </div>
+                    <div class="thread"><p class="thread-empty">Press play to run it.</p></div>
+                    <div class="composer">
+                      <div class="fake-input"><span class="caret"></span></div>
+                      <button class="send" type="button" aria-hidden="true" tabindex="-1">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12l16-8-6 8 6 8z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="console">
+                    <div class="console-head">
+                      <span class="eyebrow">The booking it filled</span>
+                      <span class="mono js-count">0 actions</span>
+                    </div>
+                    <div class="ticket">
+                      <div class="ticket-row"><span>Branch</span><b data-field="a">—</b></div>
+                      <div class="ticket-row"><span>Appointment</span><b data-field="b">—</b></div>
+                      <div class="ticket-row"><span>Patient</span><b data-field="c">—</b></div>
+                      <div class="ticket-row"><span>Phone</span><b data-field="d">—</b></div>
+                      <div class="ticket-row total"><span>Insurance</span><b data-field="e">—</b></div>
+                    </div>
+                    <div class="feed"><p class="thread-empty">Nothing yet.</p></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="rail-foot">
+          <div class="dots" id="demo-dots" role="tablist" aria-label="Choose a system"></div>
+          <div class="arrows">
+            <button id="demo-prev" type="button" aria-label="Previous system">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <button id="demo-next" type="button" aria-label="Next system">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="reveal mono" style="margin-top:1rem;font-size:var(--s--1);color:var(--ink-faint)">
+        Sample conversations. The behaviour is real — the customers and the orders are not.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRACTICE ───────────────────────────────────────────────────────── -->
+  <section id="practice">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">Also in the toolkit</span>
+          <h2 style="margin-top:.6rem">Testing and automation.</h2>
+        </div>
+      </div>
+
+      <div class="practice">
+        <div class="pract reveal">
+          <h3>End-to-end suites</h3>
+          <p>Page-object structured Playwright suites with data-driven cases, HTML reporting, and failure artefacts captured on every run.</p>
+          <div class="stack"><span>Playwright</span><span>Page objects</span><span>Fixtures</span></div>
+        </div>
+        <div class="pract reveal">
+          <h3>Cross-browser automation</h3>
+          <p>Selenium WebDriver suites on Mocha with Mochawesome reporting and screenshot capture on assertion failure.</p>
+          <div class="stack"><span>Selenium</span><span>Mocha</span><span>Mochawesome</span></div>
+        </div>
+        <div class="pract reveal">
+          <h3>API testing</h3>
+          <p>Request-level test automation for REST services — contract checks, negative cases, and regression runs.</p>
+          <div class="stack"><span>REST</span><span>Automation</span><span>CI</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT ────────────────────────────────────────────────────────── -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-in">
+      <div class="reveal">
+        <h2>Got something<br>that needs building?</h2>
+        <p>
+          Most of what I build is private client work, so the repositories below are only part of
+          the picture. The three live links above are the honest version.
+        </p>
+      </div>
+      <div class="links reveal">
+        <a class="chip solid" href="mailto:etteuwakmfonabasi46@gmail.com">etteuwakmfonabasi46@gmail.com</a>
+        <a class="chip" href="https://github.com/UwakmfonEtte" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>UwakmfonAbasi Ette</span>
+    <span>Built 2026</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── Theme ───────────────────────────────────────────────────────────── */
+  // Three states, matching how the OS actually behaves: an explicit choice wins in either
+  // direction, and no stamp means follow the system.
+  const root = document.documentElement;
+  const saved = localStorage.getItem("theme");
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+
+  document.getElementById("theme").addEventListener("click", () => {
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const current = root.getAttribute("data-theme") || (systemDark ? "dark" : "light");
+    const next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+
+  /* ── Sticky header hairline ──────────────────────────────────────────── */
+  const top = document.getElementById("top");
+  const onScroll = () => top.classList.toggle("stuck", window.scrollY > 10);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ── Scroll reveal ───────────────────────────────────────────────────── */
+  const revealables = document.querySelectorAll(".reveal");
+  if (reduced || !("IntersectionObserver" in window)) {
+    revealables.forEach((el) => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (!entry.isIntersecting) return;
+        // Stagger siblings so a grid arrives as a wave rather than all at once.
+        const delay = Math.min(i * 70, 280);
+        setTimeout(() => entry.target.classList.add("in"), delay);
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.12 });
+    revealables.forEach((el) => io.observe(el));
+  }
+
+  /* ── Carousel ────────────────────────────────────────────────────────── */
+  const track = document.getElementById("track");
+  const viewport = document.getElementById("viewport");
+  const slides = [...track.children];
+  const dotsWrap = document.getElementById("dots");
+  let index = 0;
+
+  slides.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-label", "Project " + (i + 1));
+    b.addEventListener("click", () => go(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots = [...dotsWrap.children];
+
+  function go(i) {
+    index = (i + slides.length) % slides.length;
+    track.style.transform = "translate3d(" + -index * 100 + "%,0,0)";
+    dots.forEach((d, n) => d.setAttribute("aria-current", String(n === index)));
+    slides.forEach((s, n) => s.setAttribute("aria-hidden", String(n !== index)));
+  }
+  go(0);
+
+  document.getElementById("next").addEventListener("click", () => go(index + 1));
+  document.getElementById("prev").addEventListener("click", () => go(index - 1));
+
+  // Keyboard, but only while the carousel is the thing being interacted with.
+  document.getElementById("rail").addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") { e.preventDefault(); go(index + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(index - 1); }
+  });
+
+  // Drag and swipe. Pointer events cover mouse and touch in one path.
+  let startX = 0, dx = 0, dragging = false;
+
+  viewport.addEventListener("pointerdown", (e) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    dragging = true; startX = e.clientX; dx = 0;
+    track.classList.add("dragging");
+    viewport.setPointerCapture(e.pointerId);
+  });
+
+  viewport.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    dx = e.clientX - startX;
+    const pct = (dx / viewport.clientWidth) * 100;
+    track.style.transform = "translate3d(calc(" + -index * 100 + "% + " + pct + "%),0,0)";
+  });
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove("dragging");
+    // A quarter of the viewport is a deliberate swipe; anything less snaps back.
+    if (Math.abs(dx) > viewport.clientWidth * 0.22) go(index + (dx < 0 ? 1 : -1));
+    else go(index);
+  }
+  viewport.addEventListener("pointerup", endDrag);
+  viewport.addEventListener("pointercancel", endDrag);
+  viewport.addEventListener("pointerleave", endDrag);
+
+  // Gentle autoplay, paused on hover, focus, and whenever the tab is hidden.
+  if (!reduced) {
+    let timer = null;
+    const start = () => { stop(); timer = setInterval(() => go(index + 1), 7000); };
+    const stop = () => { if (timer) clearInterval(timer); timer = null; };
+    start();
+    ["mouseenter", "focusin", "pointerdown"].forEach((ev) => viewport.addEventListener(ev, stop));
+    ["mouseleave", "focusout"].forEach((ev) => viewport.addEventListener(ev, start));
+    document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+  }
+
+  /* ── Interactive demos ───────────────────────────────────────────────────
+     One chapter runner, three products.
+
+     Earlier versions raced through a single happy path in ten seconds, which showed that the
+     things work but not what they actually do. These are broken into named chapters, paced so a
+     beat can be read before the next one lands, and the chapter strip is clickable — if the thing
+     someone needs is the wholesale quote or the restock rule, they can sit on it.
+
+     Every beat is a real documented behaviour of the product. Nothing reaches a server. */
+  (function () {
+    const host = document.getElementById("demos");
+    if (!host) return;
+
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    const PACE = {
+      type: reduced ? 0 : 34,     // ms per character
+      think: reduced ? 0 : 900,   // typing indicator before a reply
+      chapterGap: reduced ? 0 : 1500
+    };
+
+    /* ── Chapter runner ───────────────────────────────────────────────────
+       Shared by every demo. Beats carry a chapter index; the runner handles pacing, the
+       chapter strip, and jumping. Each product supplies its own beat handlers. */
+    function runner(el, cfg, handlers) {
+      const playBtn = el.querySelector(".js-play");
+      const label = el.querySelector(".js-play-label");
+      const resetBtn = el.querySelector(".js-reset");
+      const statusEl = el.querySelector(".js-status");
+
+      // Chapter strip, built here so no slide has to hand-author it.
+      const strip = document.createElement("div");
+      strip.className = "chapters";
+      cfg.chapters.forEach((name, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "chapter";
+        b.innerHTML = '<i>' + String(i + 1).padStart(2, "0") + "</i><span>" + esc(name) + "</span>";
+        b.addEventListener("click", () => playFrom(i));
+        strip.appendChild(b);
+      });
+      el.querySelector(".demo-head").after(strip);
+      const chapterEls = [...strip.children];
+
+      let timers = [];
+      let typer = null;
+      let played = false;
+      let current = -1;
+
+      const at = (ms, fn) => timers.push(setTimeout(fn, reduced ? Math.min(ms, 60) : ms));
+
+      function markChapter(i) {
+        if (i === current) return;
+        current = i;
+        chapterEls.forEach((c, n) => c.setAttribute("aria-current", String(n === i)));
+        statusEl.textContent = cfg.chapters[i];
+      }
+
+      function clear() {
+        timers.forEach(clearTimeout);
+        timers = [];
+        if (typer) { clearTimeout(typer); typer = null; }
+      }
+
+      function reset() {
+        clear();
+        current = -1;
+        chapterEls.forEach((c) => c.setAttribute("aria-current", "false"));
+        handlers.reset();
+        statusEl.textContent = "Ready";
+        playBtn.disabled = false;
+        label.textContent = cfg.playLabel || "Play";
+      }
+
+      // Types a customer/owner message a character at a time, then sends it.
+      function typeThen(text, send, done) {
+        if (reduced) { send(text); return done(); }
+        let i = 0;
+        (function step() {
+          handlers.compose(text.slice(0, i));
+          if (i++ <= text.length) typer = setTimeout(step, PACE.type);
+          else { typer = null; handlers.compose(""); send(text); done(); }
+        })();
+      }
+
+      function playFrom(chapter) {
+        clear();
+        played = true;
+        playBtn.disabled = true;
+        label.textContent = "Playing…";
+
+        // Replaying from a chapter rebuilds everything before it instantly, so the state a
+        // viewer lands on is the state that chapter actually happens in.
+        handlers.reset();
+        const startIndex = cfg.beats.findIndex((b) => b.ch === chapter);
+        for (let i = 0; i < startIndex; i++) handlers.apply(cfg.beats[i], true);
+        markChapter(chapter);
+
+        let cursor = 0;
+        const step = (i) => {
+          if (i >= cfg.beats.length) {
+            playBtn.disabled = false;
+            label.textContent = "Play again";
+            statusEl.textContent = cfg.doneLabel || "Finished";
+            return;
+          }
+          const b = cfg.beats[i];
+          const newChapter = b.ch !== current;
+          const wait = Math.max(0, (b.t || 0) - cursor) + (newChapter ? PACE.chapterGap : 0);
+
+          at(wait, () => {
+            cursor = b.t || cursor;
+            if (newChapter) markChapter(b.ch);
+
+            if (b.type === "say" || b.type === "owner-say") {
+              typeThen(b.text, () => handlers.apply(b, false), () => {
+                cursor += reduced ? 0 : b.text.length * PACE.type;
+                step(i + 1);
+              });
+              return;
+            }
+            handlers.apply(b, false);
+            step(i + 1);
+          });
+        };
+        step(startIndex);
+      }
+
+      playBtn.addEventListener("click", () => playFrom(0));
+      resetBtn.addEventListener("click", reset);
+      reset();
+
+      return {
+        play: () => playFrom(0),
+        reset,
+        get played() { return played; },
+        stop: clear
+      };
+    }
+
+    /* ── Conversation renderer ────────────────────────────────────────────── */
+    function conversationHandlers(el) {
+      const thread = el.querySelector(".thread");
+      const feed = el.querySelector(".feed");
+      const composer = el.querySelector(".fake-input");
+      const presence = el.querySelector(".js-presence");
+      const counter = el.querySelector(".js-count");
+      const fields = {};
+      el.querySelectorAll("[data-field]").forEach((f) => (fields[f.dataset.field] = f));
+      let actions = 0;
+
+      const bubble = (kind, text, who, instant) => {
+        const b = document.createElement("div");
+        b.className = "msg " + kind + (instant ? " no-anim" : "");
+        b.innerHTML = (who ? '<span class="who">' + esc(who) + "</span>" : "") + esc(text);
+        const empty = thread.querySelector(".thread-empty");
+        if (empty) empty.remove();
+        thread.appendChild(b);
+        thread.scrollTop = thread.scrollHeight;
+        return b;
+      };
+
+      return {
+        compose(text) {
+          composer.innerHTML = esc(text) + '<span class="caret"></span>';
+        },
+        reset() {
+          thread.innerHTML = '<p class="thread-empty">Press play, or pick a chapter.</p>';
+          feed.innerHTML = '<p class="thread-empty">Nothing yet.</p>';
+          composer.innerHTML = '<span class="caret"></span>';
+          Object.values(fields).forEach((f) => { f.textContent = "—"; f.classList.remove("set"); });
+          actions = 0;
+          counter.textContent = "0 actions";
+          if (presence) presence.textContent = el.dataset.presence || "online";
+        },
+        apply(b, instant) {
+          if (b.type === "say") bubble("them", b.text, null, instant);
+          if (b.type === "owner-say") bubble("owner", b.text, b.who, instant);
+          if (b.type === "human") bubble("owner", b.text, b.who, instant);
+
+          if (b.type === "reply") {
+            if (instant) { bubble("bot", b.text, null, true); return; }
+            const dots = bubble("bot", "");
+            dots.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+            setTimeout(() => { dots.remove(); bubble("bot", b.text); }, PACE.think);
+          }
+
+          if (b.type === "feed") {
+            const line = document.createElement("div");
+            line.className = "act-line " + (b.tone || "") + (instant ? " no-anim" : "");
+            line.innerHTML = '<span class="dot"></span><span>' + b.html + "</span><time>" + esc(b.time) + "</time>";
+            const empty = feed.querySelector(".thread-empty");
+            if (empty) empty.remove();
+            feed.appendChild(line);
+            feed.scrollTop = feed.scrollHeight;
+            actions++;
+            counter.textContent = actions + (actions === 1 ? " action" : " actions");
+          }
+
+          if (b.type === "field") {
+            const f = fields[b.name];
+            if (f) {
+              f.textContent = b.value;
+              f.classList.remove("set");
+              if (!instant) { void f.offsetWidth; f.classList.add("set"); }
+            }
+          }
+
+          if (b.type === "presence" && presence) presence.textContent = b.text;
+        }
+      };
+    }
+
+    /* ── Scripts ──────────────────────────────────────────────────────────── */
+    const FONZ = {
+      playLabel: "Play the walkthrough",
+      doneLabel: "Order captured",
+      chapters: [
+        "A customer asks a price",
+        "Buying in bulk",
+        "The owner changes a rule",
+        "Her notepad still works",
+        "She takes over"
+      ],
+      beats: [
+        // 1 — pricing from the catalogue
+        { ch: 0, t: 0, type: "say", text: "Good afternoon, do you have black seed oil?" },
+        { ch: 0, t: 200, type: "feed", html: "Message from <b>+234 803 •••• 4471</b>", time: "14:02" },
+        { ch: 0, t: 600, type: "reply", text: "Good afternoon! Yes — black seed oil, 100ml for ₦4,500 and 250ml for ₦9,800. Which would you like?" },
+        { ch: 0, t: 2200, type: "feed", html: "Priced from the catalogue — <b>no figure invented</b>", time: "14:02" },
+        { ch: 0, t: 3400, type: "say", text: "Is the 250ml ready now?" },
+        { ch: 0, t: 4000, type: "reply", text: "That one I make to order — ready in 3 days. The 100ml is bottled and ready today." },
+        { ch: 0, t: 5600, type: "feed", html: "Made-to-order lead time, not a vague 'let me check'", time: "14:03" },
+        { ch: 0, t: 5800, type: "field", name: "a", value: "+234 803 •••• 4471" },
+
+        // 2 — wholesale, computed rather than deferred
+        { ch: 1, t: 7200, type: "say", text: "What if I take 20 of the 250ml for my shop?" },
+        { ch: 1, t: 7900, type: "reply", text: "At 20 units the wholesale rate is ₦8,300 each — ₦166,000 for the lot, and delivery to Uyo is free over ₦100,000." },
+        { ch: 1, t: 9600, type: "feed", html: "Quantity-break tier applied — <b>₦1,500 off each</b>", time: "14:05" },
+        { ch: 1, t: 10800, type: "feed", html: "Answered outright, not deferred to the owner", time: "14:05" },
+        { ch: 1, t: 11000, type: "field", name: "b", value: "Black seed oil 250ml" },
+        { ch: 1, t: 11300, type: "field", name: "c", value: "20 (wholesale)" },
+
+        // 3 — the owner rewrites shop policy in plain English
+        { ch: 2, t: 12800, type: "presence", text: "Mrs Mfon · admin chat" },
+        { ch: 2, t: 12900, type: "owner-say", text: "we now deliver nationwide", who: "Mrs Mfon · her pinned admin chat" },
+        { ch: 2, t: 13600, type: "feed", html: "Read as a <b>standing policy</b>, not a personal note", time: "14:08" },
+        { ch: 2, t: 14800, type: "feed", html: "Old rule replaced — customers cannot get two answers", time: "14:08" },
+        { ch: 2, t: 16200, type: "presence", text: "Assistant · online" },
+        { ch: 2, t: 16300, type: "say", text: "Can you deliver to Port Harcourt?" },
+        { ch: 2, t: 17000, type: "reply", text: "Yes — we deliver nationwide. Port Harcourt is ₦4,000 and arrives in 2 to 3 days." },
+        { ch: 2, t: 18600, type: "feed", html: "New rule in force on the <b>very next message</b>", time: "14:09" },
+        { ch: 2, t: 18800, type: "field", name: "d", value: "Port Harcourt" },
+
+        // 4 — the same inbox is still her notepad
+        { ch: 3, t: 20200, type: "presence", text: "Mrs Mfon · admin chat" },
+        { ch: 3, t: 20300, type: "owner-say", text: "remember to call the supplier about jars", who: "Mrs Mfon · her pinned admin chat" },
+        { ch: 3, t: 21000, type: "feed", html: "Filed as a <b>private note</b> — the shop is untouched", time: "14:11", tone: "hold" },
+        { ch: 3, t: 22200, type: "feed", html: "When it is ambiguous it saves a note rather than change a price", time: "14:11", tone: "hold" },
+
+        // 5 — handover
+        { ch: 4, t: 23800, type: "presence", text: "Mrs Mfon is typing…" },
+        { ch: 4, t: 23900, type: "feed", html: "<b>Owner started typing</b> — assistant stands down", time: "14:13", tone: "hold" },
+        { ch: 4, t: 25100, type: "human", text: "Hi dear! For 20 I can do ₦160,000 all in 😊", who: "Mrs Mfon · in person" },
+        { ch: 4, t: 25200, type: "feed", html: "Stayed silent while she replied", time: "14:13", tone: "hold" },
+        { ch: 4, t: 26600, type: "feed", html: "Waiting <b>4 minutes</b> of quiet before resuming", time: "14:13", tone: "hold" },
+        { ch: 4, t: 26800, type: "presence", text: "Assistant · standing by" },
+        { ch: 4, t: 28200, type: "field", name: "e", value: "₦160,000" },
+        { ch: 4, t: 28300, type: "feed", html: "Order pushed into her pinned chat as an order book entry", time: "14:17" },
+        { ch: 4, t: 28500, type: "presence", text: "Assistant · online" }
+      ]
+    };
+
+    const ENWONGO = {
+      playLabel: "Play the walkthrough",
+      doneLabel: "Escalated to a nurse",
+      chapters: [
+        "Answering the usual questions",
+        "Finding a slot",
+        "Taking the booking",
+        "Knowing when to stop"
+      ],
+      beats: [
+        { ch: 0, t: 0, type: "say", text: "Good morning, do you take AXA Mansard?" },
+        { ch: 0, t: 200, type: "feed", html: "New conversation opened", time: "09:14" },
+        { ch: 0, t: 700, type: "reply", text: "Good morning, welcome to Enwongo-Abasi Medical Centre. Yes, we accept AXA Mansard and Hygeia at both branches." },
+        { ch: 0, t: 2400, type: "feed", html: "Answered from the centre's own FAQ", time: "09:14" },
+        { ch: 0, t: 3600, type: "say", text: "And what time do you close today?" },
+        { ch: 0, t: 4200, type: "reply", text: "Uyo is open until 6pm today, Edeobom until 4pm. Which is closer to you?" },
+
+        { ch: 1, t: 6200, type: "say", text: "Uyo. Can I see a doctor tomorrow morning?" },
+        { ch: 1, t: 6400, type: "field", name: "a", value: "Uyo" },
+        { ch: 1, t: 6800, type: "feed", html: "Checked the live calendar — <b>4 slots open</b>", time: "09:16" },
+        { ch: 1, t: 7400, type: "reply", text: "Tomorrow at Uyo we have 9:00, 11:00, 1:30 and 4:00. Which suits you?" },
+        { ch: 1, t: 9000, type: "feed", html: "Real availability, not a promise to call back", time: "09:16" },
+
+        { ch: 2, t: 10600, type: "say", text: "9am please. Blessing Effiong, 08076543210" },
+        { ch: 2, t: 10800, type: "field", name: "b", value: "Wed · 9:00 AM" },
+        { ch: 2, t: 11100, type: "field", name: "c", value: "Blessing Effiong" },
+        { ch: 2, t: 11400, type: "field", name: "d", value: "080 7654 3210" },
+        { ch: 2, t: 11700, type: "field", name: "e", value: "AXA Mansard" },
+        { ch: 2, t: 12000, type: "feed", html: "Every field filled <b>from the conversation</b>", time: "09:17" },
+        { ch: 2, t: 12800, type: "reply", text: "Booked — Blessing Effiong, Uyo, tomorrow 9:00 AM, AXA Mansard. Please bring your HMO card." },
+        { ch: 2, t: 14400, type: "feed", html: "Slot held — <b>nobody else can take it</b>", time: "09:17" },
+        { ch: 2, t: 15600, type: "feed", html: "Nothing retyped later by the front desk", time: "09:17" },
+
+        { ch: 3, t: 17200, type: "say", text: "Also is it normal to feel dizzy after the malaria drugs?" },
+        { ch: 3, t: 17400, type: "feed", html: "<b>Clinical question</b> — refused, not answered", time: "09:19", tone: "warn" },
+        { ch: 3, t: 18200, type: "reply", text: "That's one for our clinical team — I'll have a nurse call you shortly. I'm not able to give medical advice." },
+        { ch: 3, t: 19800, type: "feed", html: "Passed to a human with the full thread attached", time: "09:19", tone: "warn" },
+        { ch: 3, t: 21000, type: "feed", html: "The booking above is untouched by the handoff", time: "09:19" }
+      ]
+    };
+
+    /* ── Wire the slides ──────────────────────────────────────────────────── */
+    const instances = {};
+    host.querySelectorAll("[data-demo]").forEach((el) => {
+      const name = el.dataset.demo;
+      if (name === "tracker") return;          // brings its own renderer, wired below
+      const cfg = name === "fonz" ? FONZ : ENWONGO;
+      instances[name] = runner(el, cfg, conversationHandlers(el));
+    });
+
+    window.__wireTracker = (make) => { instances.tracker = make(runner); };
+
+    /* ── Carousel ─────────────────────────────────────────────────────────── */
+    const dTrack = document.getElementById("demo-track");
+    const dSlides = [...dTrack.children];
+    const dDots = document.getElementById("demo-dots");
+    let dIndex = 0;
+
+    dSlides.forEach((s, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-label", s.querySelector("h3").textContent);
+      b.addEventListener("click", () => dGo(i));
+      dDots.appendChild(b);
+    });
+    const dDotEls = [...dDots.children];
+
+    function dGo(i) {
+      const leaving = dSlides[dIndex].querySelector("[data-demo]");
+      if (leaving && instances[leaving.dataset.demo]) instances[leaving.dataset.demo].stop();
+
+      dIndex = (i + dSlides.length) % dSlides.length;
+      dTrack.style.transform = "translate3d(" + -dIndex * 100 + "%,0,0)";
+      dDotEls.forEach((d, n) => d.setAttribute("aria-current", String(n === dIndex)));
+      dSlides.forEach((s, n) => s.setAttribute("aria-hidden", String(n !== dIndex)));
+
+      const arriving = dSlides[dIndex].querySelector("[data-demo]");
+      const inst = arriving && instances[arriving.dataset.demo];
+      if (inst) { inst.reset(); if (!reduced) setTimeout(inst.play, 700); }
+    }
+    setTimeout(() => dGo(0), 0);
+
+    document.getElementById("demo-next").addEventListener("click", () => dGo(dIndex + 1));
+    document.getElementById("demo-prev").addEventListener("click", () => dGo(dIndex - 1));
+    host.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); dGo(dIndex + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); dGo(dIndex - 1); }
+    });
+
+    if (!reduced && "IntersectionObserver" in window) {
+      const once = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          once.disconnect();
+          const first = dSlides[0].querySelector("[data-demo]");
+          const inst = first && instances[first.dataset.demo];
+          if (inst && !inst.played) inst.play();
+        });
+      }, { threshold: 0.3 });
+      once.observe(host);
+    }
+  })();
+
+  /* ── Business Tracker walkthrough ────────────────────────────────────────
+     The real interface, driven through the operations a shop actually performs in a day: stock
+     in, a restock that must not become a duplicate row, a sale that draws the count down, a
+     receipt, an expense, and the month that falls out of all of it.
+
+     Every figure is computed from the cost and price in the inventory table, so the margin and
+     the totals are arithmetic rather than strings — change a price and everything downstream
+     follows. */
+  (function () {
+    const app = document.getElementById("bt");
+    if (!app || !window.__wireTracker) return;
+
+    const el = app.closest("[data-demo]");
+    const log = document.getElementById("bt-log");
+    const input = document.getElementById("bt-input");
+    const invBody = document.getElementById("bt-inv");
+    const salesBody = document.getElementById("bt-sales");
+    const expBody = document.getElementById("bt-exp");
+    const receipts = document.getElementById("bt-receipts");
+    const statusEl = document.getElementById("bt-status");
+    const tabs = [...app.querySelectorAll(".bt-tab")];
+    const panes = [...app.querySelectorAll(".bt-pane")];
+
+    const naira = (n) => "₦" + n.toLocaleString("en-NG");
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    let stock = [];
+    let sales = [];
+    let expenses = [];
+    let lastReceipt = null;
+
+    function show(pane) {
+      tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.pane === pane)));
+      panes.forEach((p) => p.classList.toggle("bt-on", p.dataset.pane === pane));
+    }
+
+    function say(kind, text, instant) {
+      const b = document.createElement("div");
+      b.className = "bt-msg " + kind + (instant ? " no-anim" : "");
+      b.textContent = text;
+      log.appendChild(b);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function renderInventory(dropName, instant) {
+      if (!stock.length) {
+        invBody.innerHTML = '<tr><td colspan="4" class="bt-empty">Nothing in stock yet.</td></tr>';
+        return;
+      }
+      invBody.innerHTML = stock.map((p) =>
+        '<tr class="' + (p.fresh && !instant ? "bt-new" : "") + '">' +
+        "<td>" + esc(p.name) + "</td>" +
+        '<td class="bt-n">' + naira(p.cost) + "</td>" +
+        '<td class="bt-n">' + naira(p.price) + "</td>" +
+        '<td class="bt-n"><span class="bt-qty ' + (p.name === dropName && !instant ? "bt-drop" : "") + '">' + p.qty + "</span></td>" +
+        "</tr>"
+      ).join("");
+      stock.forEach((p) => (p.fresh = false));
+    }
+
+    function renderSales(instant) {
+      if (!sales.length) {
+        salesBody.innerHTML = '<tr><td colspan="4" class="bt-empty">No sales recorded yet.</td></tr>';
+        return;
+      }
+      salesBody.innerHTML = sales.map((s, i) =>
+        '<tr class="' + (i === sales.length - 1 && !instant ? "bt-new" : "") + '">' +
+        "<td>" + esc(s.name) + "</td><td>" + esc(s.customer) + "</td>" +
+        '<td class="bt-n">' + s.qty + '</td><td class="bt-n">' + naira(s.total) + "</td></tr>"
+      ).join("");
+    }
+
+    function renderExpenses(instant) {
+      if (!expenses.length) {
+        expBody.innerHTML = '<tr><td colspan="3" class="bt-empty">No expenses recorded yet.</td></tr>';
+        return;
+      }
+      expBody.innerHTML = expenses.map((e, i) =>
+        '<tr class="' + (i === expenses.length - 1 && !instant ? "bt-new" : "") + '">' +
+        "<td>" + esc(e.what) + "</td><td>" + esc(e.when) + "</td>" +
+        '<td class="bt-n">' + naira(e.amount) + "</td></tr>"
+      ).join("");
+    }
+
+    function renderStats(instant) {
+      const revenue = sales.reduce((n, s) => n + s.total, 0);
+      const cogs = sales.reduce((n, s) => n + s.cost * s.qty, 0);
+      const spend = expenses.reduce((n, e) => n + e.amount, 0);
+      const units = sales.reduce((n, s) => n + s.qty, 0);
+      const stockValue = stock.reduce((n, p) => n + p.cost * p.qty, 0);
+
+      const set = (key, value) => {
+        const t = app.querySelector('[data-stat="' + key + '"]');
+        if (!t) return;
+        t.textContent = value;
+        t.classList.remove("bt-bump");
+        if (!instant) { void t.offsetWidth; t.classList.add("bt-bump"); }
+      };
+      set("revenue", naira(revenue));
+      set("cogs", naira(cogs));
+      set("expenses", naira(spend));
+      set("profit", naira(revenue - cogs - spend));
+      set("units", String(units));
+      set("stock", naira(stockValue));
+    }
+
+    function renderReceipt(instant) {
+      if (!lastReceipt) { receipts.innerHTML = '<div class="bt-empty">No receipts yet.</div>'; return; }
+      const s = lastReceipt;
+      receipts.innerHTML =
+        '<div class="bt-receipt' + (instant ? " no-anim" : "") + '">' +
+          "<h4>Havilah Gadgets</h4>" +
+          '<div class="bt-r-sub">Aka Road, Uyo · 0803 •••• 4471</div>' +
+          '<div class="bt-r-row"><span>Receipt</span><span>#00241</span></div>' +
+          '<div class="bt-r-row"><span>Customer</span><span>' + esc(s.customer) + "</span></div>" +
+          '<div class="bt-r-rule"></div>' +
+          '<div class="bt-r-row"><span>' + s.qty + " × " + esc(s.name) + "</span><span>" + naira(s.price) + "</span></div>" +
+          '<div class="bt-r-rule"></div>' +
+          '<div class="bt-r-row bt-r-total"><span>Total</span><span>' + naira(s.total) + "</span></div>" +
+          '<div class="bt-r-foot">Thank you — goods sold are not returnable<br>after 7 days</div>' +
+        "</div>";
+    }
+
+    const handlers = {
+      compose(text) { input.innerHTML = esc(text) + '<span class="bt-caret"></span>'; },
+
+      reset() {
+        stock = []; sales = []; expenses = []; lastReceipt = null;
+        log.innerHTML = "";
+        input.innerHTML = '<span class="bt-caret"></span>';
+        statusEl.textContent = "Running locally — no internet needed";
+        renderInventory(null, true);
+        renderSales(true);
+        renderExpenses(true);
+        renderReceipt(true);
+        renderStats(true);
+        show("inventory");
+        say("bt-bot", "Tell me what to add to inventory, log a sale, record an expense, or ask for a receipt.", true);
+      },
+
+      apply(b, instant) {
+        if (b.type === "say") say("bt-me", b.text, instant);
+        if (b.type === "reply") say("bt-bot", b.text, instant);
+        if (b.type === "tab") show(b.pane);
+        if (b.type === "note") statusEl.textContent = b.text;
+
+        if (b.type === "add") {
+          // Re-adding a product it already knows is a restock, not a second row. This is a real
+          // rule in the product and it is the difference between a stock count you can trust and
+          // one with three "Tecno Spark 20" entries in it.
+          const existing = stock.find((p) => p.name === b.name);
+          if (existing) { existing.qty += b.qty; existing.fresh = true; }
+          else stock.push({ name: b.name, cost: b.cost, price: b.price, qty: b.qty, fresh: true });
+          renderInventory(null, instant);
+          renderStats(instant);
+        }
+
+        if (b.type === "sell") {
+          const p = stock.find((x) => x.name === b.name);
+          if (p) {
+            p.qty -= b.qty;
+            const sale = { name: p.name, customer: b.customer, qty: b.qty, price: p.price, cost: p.cost, total: p.price * b.qty };
+            sales.push(sale);
+            lastReceipt = sale;
+            renderInventory(p.name, instant);
+            renderSales(instant);
+            renderStats(instant);
+          }
+        }
+
+        if (b.type === "expense") {
+          expenses.push({ what: b.what, when: b.when, amount: b.amount });
+          renderExpenses(instant);
+          renderStats(instant);
+        }
+
+        if (b.type === "receipt") renderReceipt(instant);
+      }
+    };
+
+    const CFG = {
+      playLabel: "Play the walkthrough",
+      doneLabel: "Books up to date",
+      chapters: [
+        "Stock arrives",
+        "Restocking, not duplicating",
+        "A sale, and the count drops",
+        "The receipt",
+        "Money going out",
+        "The month so far"
+      ],
+      beats: [
+        // 1 — stock in
+        { ch: 0, t: 0, type: "tab", pane: "inventory" },
+        { ch: 0, t: 100, type: "say", text: "add 15 Tecno Spark 20, cost 132k, sell 168k" },
+        { ch: 0, t: 300, type: "add", name: "Tecno Spark 20", cost: 132000, price: 168000, qty: 15 },
+        { ch: 0, t: 500, type: "reply", text: "Added. 15 × Tecno Spark 20 at ₦132,000 cost, ₦168,000 selling." },
+        { ch: 0, t: 700, type: "note", text: "Stock added — 15 units" },
+        { ch: 0, t: 2400, type: "say", text: "add 8 Galaxy A55 256GB, cost 385k, sell 452k" },
+        { ch: 0, t: 2600, type: "add", name: "Galaxy A55 256GB", cost: 385000, price: 452000, qty: 8 },
+        { ch: 0, t: 2800, type: "reply", text: "Added. 8 × Galaxy A55 256GB in stock." },
+
+        // 2 — the restock rule
+        { ch: 1, t: 4600, type: "say", text: "add 10 more Tecno Spark 20" },
+        { ch: 1, t: 4800, type: "add", name: "Tecno Spark 20", cost: 132000, price: 168000, qty: 10 },
+        { ch: 1, t: 5000, type: "reply", text: "That one is already on the shelf — restocked. Tecno Spark 20 is now 25, not a second line." },
+        { ch: 1, t: 5200, type: "note", text: "Restocked — 15 → 25, still one row" },
+        { ch: 1, t: 7000, type: "reply", text: "Same product, same brand and variant, so it adds to the count instead of splitting your stock in two." },
+
+        // 3 — the sale
+        { ch: 2, t: 9000, type: "say", text: "sold 2 Tecno Spark 20 to Aniekan Udo" },
+        { ch: 2, t: 9200, type: "sell", name: "Tecno Spark 20", qty: 2, customer: "Aniekan Udo" },
+        { ch: 2, t: 9400, type: "note", text: "Stock reduced — 25 → 23" },
+        { ch: 2, t: 9600, type: "reply", text: "Recorded. 2 × Tecno Spark 20 at ₦168,000 — ₦336,000. Stock is now 23." },
+        { ch: 2, t: 11600, type: "tab", pane: "sales" },
+        { ch: 2, t: 11800, type: "note", text: "Logged against Aniekan Udo" },
+
+        // 4 — the receipt
+        { ch: 3, t: 13600, type: "tab", pane: "receipts" },
+        { ch: 3, t: 13800, type: "receipt" },
+        { ch: 3, t: 14000, type: "note", text: "Receipt #00241 issued" },
+        { ch: 3, t: 14400, type: "reply", text: "Receipt sent to Aniekan." },
+
+        // 5 — expenses
+        { ch: 4, t: 16400, type: "tab", pane: "expenses" },
+        { ch: 4, t: 16600, type: "say", text: "paid 180k shop rent for September" },
+        { ch: 4, t: 16800, type: "expense", what: "Shop rent — September", when: "01 Sep", amount: 180000 },
+        { ch: 4, t: 17000, type: "reply", text: "Recorded. ₦180,000 rent, dated 1 September." },
+        { ch: 4, t: 18800, type: "say", text: "35k for NEPA units and 28k generator fuel" },
+        { ch: 4, t: 19000, type: "expense", what: "NEPA prepaid units", when: "02 Sep", amount: 35000 },
+        { ch: 4, t: 19300, type: "expense", what: "Generator fuel", when: "02 Sep", amount: 28000 },
+        { ch: 4, t: 19500, type: "reply", text: "Both recorded — ₦63,000 across two entries." },
+        { ch: 4, t: 19700, type: "note", text: "Spend this month — ₦243,000" },
+
+        // 6 — the month
+        { ch: 5, t: 21600, type: "tab", pane: "overview" },
+        { ch: 5, t: 21800, type: "say", text: "how did we do this month?" },
+        { ch: 5, t: 22000, type: "note", text: "Assembled from the ledger, not a saved report" },
+        { ch: 5, t: 22400, type: "reply", text: "September so far: ₦336,000 in, ₦264,000 of goods, ₦243,000 of costs. You are ₦171,000 down on the month — one sale has not covered the rent yet." },
+        { ch: 5, t: 24600, type: "reply", text: "Stock on the shelf is worth ₦6,116,000, so the money is in inventory rather than gone." }
+      ]
+    };
+
+    window.__wireTracker((runner) => runner(el, CFG, handlers));
+  })();
+
+})();
+</script>
