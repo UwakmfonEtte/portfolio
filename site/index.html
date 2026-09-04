@@ -135,8 +135,21 @@ a { color: inherit; }
   font-family: var(--display); font-weight: 800; font-size: 1.05rem;
   letter-spacing: -.02em; margin-right: auto;
   font-variation-settings: "wdth" 100;
+  display: inline-flex; align-items: center; gap: .6rem;
+  text-decoration: none; color: var(--ink);
 }
-.sig span { color: var(--accent); }
+.sig .hl { color: var(--accent); }
+/* The monogram: a U over a stem, drawn once at 28px. Colour follows the accent so it picks
+   up the theme with everything else. */
+.sig .mark { display: inline-flex; color: var(--accent); }
+.sig .mark svg { width: 28px; height: 28px; display: block; }
+.sig:hover .hl { color: var(--ink); }
+.sig:hover .mark { color: var(--ink); }
+
+/* The sprite itself is never rendered — only its symbols are, through <use>. */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* Icons inside chips and headings size to the text they sit beside. */
+.ic { width: 1.05em; height: 1.05em; flex: none; }
 .theme-btn {
   font: inherit; font-family: var(--mono); font-size: var(--s--1);
   background: none; border: 1px solid var(--rule-firm); color: var(--ink-soft);
@@ -302,6 +315,15 @@ section { padding: clamp(3rem, 6.5vw, 5.5rem) 0; scroll-margin-top: 84px; }
 .pract h3 { font-size: var(--s-1); font-variation-settings: "wdth" 92; margin-bottom: .5rem; }
 .pract p { color: var(--ink-soft); font-size: var(--s--1); }
 .pract .stack { padding-top: 1rem; }
+/* Card icon. Sits in a washed tile so it reads as a mark rather than a stray line drawing. */
+.pract .pict {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 8px; margin-bottom: .9rem;
+  background: var(--accent-wash); color: var(--accent);
+  transition: background .3s, color .3s;
+}
+.pract .pict svg { width: 22px; height: 22px; display: block; }
+.pract:hover .pict { background: var(--accent); color: var(--on-accent); }
 
 /* ── Contact ─────────────────────────────────────────────────────────────── */
 .contact { border-top: 1px solid var(--rule); }
@@ -613,9 +635,45 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
 }
 </style>
 
+<!-- Icon sprite. Defined once, referenced with <use>. Inline rather than a file because the
+     deployed CSP is img-src 'self' data: — nothing external loads, and an <img> to a sprite
+     would be one more request for four small shapes. -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-github" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2.17c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.29-1.69-1.29-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/>
+  </symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>
+  </symbol>
+  <!-- A browser frame with a pass mark: an end-to-end run against a real page. -->
+  <symbol id="i-e2e" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8.5h20M5 6.25h.01M7.5 6.25h.01M10 6.25h.01"/>
+    <path d="M8.5 14.2l2.5 2.5 4.5-4.9"/>
+  </symbol>
+  <!-- Three stacked frames: the same suite driven through several browsers. -->
+  <symbol id="i-browsers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="7" width="14" height="12" rx="2"/><path d="M2 10.6h14M4.6 8.8h.01M6.9 8.8h.01"/>
+    <path d="M6 4.6h11.5a2 2 0 0 1 2 2V16"/><path d="M9 2h9.5a2 2 0 0 1 2 2v9.5"/>
+  </symbol>
+  <!-- A request going out and a response coming back, between two braces. -->
+  <symbol id="i-api" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7.5 3.5C5.4 3.5 5.9 8 3.6 8.6c2.3.6 1.8 5.1 3.9 5.1M16.5 3.5c2.1 0 1.6 4.5 3.9 5.1-2.3.6-1.8 5.1-3.9 5.1"/>
+    <path d="M5 18h11M16 18l-2.6-2.6M16 18l-2.6 2.6"/>
+  </symbol>
+</svg>
+
 <header class="top" id="top">
   <div class="wrap">
-    <span class="sig">Uwakmfon<span>Abasi</span>'s Portfolio</span>
+    <a class="sig" href="#top" aria-label="UwakmfonAbasi Ette — top of page">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="30" height="30" rx="6" fill="currentColor" opacity=".1"/>
+          <path d="M9 9v7.5a7 7 0 0 0 14 0V9" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/>
+          <path d="M16 23.5V27" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/>
+        </svg>
+      </span>
+      <span class="word">Uwakmfon<span class="hl">Abasi</span>'s Portfolio</span>
+    </a>
     <a class="chip" href="mailto:etteuwakmfonabasi46@gmail.com">Email</a>
     <button class="theme-btn" id="theme" type="button" aria-label="Switch colour theme">Theme</button>
   </div>
@@ -638,7 +696,7 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
         </p>
         <div class="links">
           <a class="chip solid" href="mailto:etteuwakmfonabasi46@gmail.com">Email me</a>
-          <a class="chip" href="https://github.com/UwakmfonEtte" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="chip" href="https://github.com/UwakmfonEtte" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg> GitHub</a>
         </div>
       </div>
 
@@ -686,7 +744,7 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
                     <div><span class="k">Started on</span><span class="v">Base Sepolia</span></div>
                   </div>
                   <div class="links" style="margin-top:1rem">
-                    <a class="chip solid" href="https://kakenft.bet/markets" target="_blank" rel="noopener">kakenft.bet ↗</a>
+                    <a class="chip solid" href="https://kakenft.bet/markets" target="_blank" rel="noopener">kakenft.bet <svg class="ic" aria-hidden="true"><use href="#i-ext"/></svg></a>
                   </div>
                 </div>
               </div>
@@ -712,7 +770,7 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
                     <div><span class="k">Bridge</span><span class="v">LayerZero V2, batched</span></div>
                   </div>
                   <div class="links" style="margin-top:1rem">
-                    <a class="chip solid" href="https://www.kinsman.live/" target="_blank" rel="noopener">kinsman.live ↗</a>
+                    <a class="chip solid" href="https://www.kinsman.live/" target="_blank" rel="noopener">kinsman.live <svg class="ic" aria-hidden="true"><use href="#i-ext"/></svg></a>
                   </div>
                 </div>
               </div>
@@ -737,7 +795,7 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
                     <div><span class="k">Terms</span><span class="v">70% LTV, 3–90 days</span></div>
                   </div>
                   <div class="links" style="margin-top:1rem">
-                    <a class="chip solid" href="https://hoodbunnies.vercel.app/" target="_blank" rel="noopener">hoodbunnies.vercel.app ↗</a>
+                    <a class="chip solid" href="https://hoodbunnies.vercel.app/" target="_blank" rel="noopener">hoodbunnies.vercel.app <svg class="ic" aria-hidden="true"><use href="#i-ext"/></svg></a>
                   </div>
                 </div>
               </div>
@@ -1027,16 +1085,19 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
 
       <div class="practice">
         <div class="pract reveal">
+          <span class="pict"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-e2e"/></svg></span>
           <h3>End-to-end suites</h3>
           <p>Page-object structured Playwright suites with data-driven cases, HTML reporting, and failure artefacts captured on every run.</p>
           <div class="stack"><span>Playwright</span><span>Page objects</span><span>Fixtures</span></div>
         </div>
         <div class="pract reveal">
+          <span class="pict"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-browsers"/></svg></span>
           <h3>Cross-browser automation</h3>
           <p>Selenium WebDriver suites on Mocha with Mochawesome reporting and screenshot capture on assertion failure.</p>
           <div class="stack"><span>Selenium</span><span>Mocha</span><span>Mochawesome</span></div>
         </div>
         <div class="pract reveal">
+          <span class="pict"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-api"/></svg></span>
           <h3>API testing</h3>
           <p>Request-level test automation for REST services — contract checks, negative cases, and regression runs.</p>
           <div class="stack"><span>REST</span><span>Automation</span><span>CI</span></div>
@@ -1057,7 +1118,7 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
       </div>
       <div class="links reveal">
         <a class="chip solid" href="mailto:etteuwakmfonabasi46@gmail.com">etteuwakmfonabasi46@gmail.com</a>
-        <a class="chip" href="https://github.com/UwakmfonEtte" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="chip" href="https://github.com/UwakmfonEtte" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg> GitHub</a>
       </div>
     </div>
   </section>
@@ -1149,25 +1210,46 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
   });
 
   // Drag and swipe. Pointer events cover mouse and touch in one path.
-  let startX = 0, dx = 0, dragging = false;
+  //
+  // The pointer is deliberately NOT captured on pointerdown. Capturing there retargets every
+  // later event — including the click — to the viewport, so the links inside a slide stopped
+  // working entirely: press, release, nothing. Capture is deferred until the pointer has
+  // actually travelled SLOP pixels, which is the point where the gesture is a drag and no
+  // longer a click. A press that never moves is left alone and reaches the anchor normally.
+  const SLOP = 8;
+  let startX = 0, dx = 0, pending = false, dragging = false, pid = null;
+
+  // Pressing on a slide lands on its screenshot, and dragging an <img> starts the browser's own
+  // image drag — which fires pointercancel and killed the swipe before it had travelled far
+  // enough to be recognised. The old code never saw this because capturing on pointerdown
+  // suppressed it. Cancelling dragstart is the narrow fix; it does not affect a click on a link.
+  viewport.addEventListener("dragstart", (e) => e.preventDefault());
 
   viewport.addEventListener("pointerdown", (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
-    dragging = true; startX = e.clientX; dx = 0;
-    track.classList.add("dragging");
-    viewport.setPointerCapture(e.pointerId);
+    pending = true; dragging = false; startX = e.clientX; dx = 0; pid = e.pointerId;
   });
 
   viewport.addEventListener("pointermove", (e) => {
-    if (!dragging) return;
+    if (!pending || e.pointerId !== pid) return;
     dx = e.clientX - startX;
+
+    if (!dragging) {
+      if (Math.abs(dx) < SLOP) return;
+      dragging = true;
+      track.classList.add("dragging");
+      viewport.setPointerCapture(pid);
+    }
+
     const pct = (dx / viewport.clientWidth) * 100;
     track.style.transform = "translate3d(calc(" + -index * 100 + "% + " + pct + "%),0,0)";
   });
 
-  function endDrag() {
-    if (!dragging) return;
-    dragging = false;
+  function endDrag(e) {
+    if (!pending || (e && e.pointerId !== pid)) return;
+    const wasDragging = dragging;
+    pending = false; dragging = false; pid = null;
+    if (!wasDragging) return;          // a plain click: leave the track where it is
     track.classList.remove("dragging");
     // A quarter of the viewport is a deliberate swipe; anything less snaps back.
     if (Math.abs(dx) > viewport.clientWidth * 0.22) go(index + (dx < 0 ? 1 : -1));
@@ -1175,7 +1257,16 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
   }
   viewport.addEventListener("pointerup", endDrag);
   viewport.addEventListener("pointercancel", endDrag);
-  viewport.addEventListener("pointerleave", endDrag);
+
+  // A drag that ends outside the viewport is settled by the capture, so pointerleave only
+  // needs to clear a press that never became a drag.
+  viewport.addEventListener("pointerleave", (e) => { if (!dragging) endDrag(e); });
+
+  // Suppress the click that terminates a real drag, so releasing on top of a link after
+  // swiping does not also navigate.
+  viewport.addEventListener("click", (e) => {
+    if (Math.abs(dx) > SLOP) { e.preventDefault(); e.stopPropagation(); dx = 0; }
+  }, true);
 
   // Gentle autoplay, paused on hover, focus, and whenever the tab is hidden.
   if (!reduced) {
@@ -1525,10 +1616,16 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
       b.type = "button";
       b.setAttribute("role", "tab");
       b.setAttribute("aria-label", s.querySelector("h3").textContent);
-      b.addEventListener("click", () => dGo(i));
+      b.addEventListener("click", () => { armed = true; dGo(i); });
       dDots.appendChild(b);
     });
     const dDotEls = [...dDots.children];
+
+    // Nothing plays until the section has been armed — either by scrolling it properly into
+    // view, or by the visitor reaching for a control. Before that, dGo only sets up state.
+    // The initial dGo(0) used to start the first walkthrough the moment the page loaded, which
+    // meant it was usually finished before anyone scrolled down to it.
+    let armed = false;
 
     function dGo(i) {
       const leaving = dSlides[dIndex].querySelector("[data-demo]");
@@ -1541,27 +1638,48 @@ footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); }
 
       const arriving = dSlides[dIndex].querySelector("[data-demo]");
       const inst = arriving && instances[arriving.dataset.demo];
-      if (inst) { inst.reset(); if (!reduced) setTimeout(inst.play, 700); }
+      if (inst) { inst.reset(); if (armed && !reduced) setTimeout(inst.play, 700); }
     }
     setTimeout(() => dGo(0), 0);
 
-    document.getElementById("demo-next").addEventListener("click", () => dGo(dIndex + 1));
-    document.getElementById("demo-prev").addEventListener("click", () => dGo(dIndex - 1));
+    document.getElementById("demo-next").addEventListener("click", () => { armed = true; dGo(dIndex + 1); });
+    document.getElementById("demo-prev").addEventListener("click", () => { armed = true; dGo(dIndex - 1); });
     host.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") { e.preventDefault(); dGo(dIndex + 1); }
-      if (e.key === "ArrowLeft") { e.preventDefault(); dGo(dIndex - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); armed = true; dGo(dIndex + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); armed = true; dGo(dIndex - 1); }
     });
 
+    // Start the first walkthrough on its own, once it is properly on screen — a demo that
+    // begins while it is a sliver at the bottom of the viewport has half finished by the time
+    // anyone is looking at it.
+    //
+    // "80% visible" cannot be expressed as threshold: 0.8 alone: the demo is taller than most
+    // viewports, so the fraction of the ELEMENT on screen never reaches 0.8 and the callback
+    // would never fire. The measure that actually matters is how much of the VIEWPORT the demo
+    // fills, so both are computed and either one clearing 80% counts. Thresholds are stepped
+    // because a tall element only ever reports small ratios.
     if (!reduced && "IntersectionObserver" in window) {
+      const NEED = 0.8;
+      const steps = [];
+      for (let i = 0; i <= 20; i++) steps.push(i / 20);
+
       const once = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
+
+          const vh = window.innerHeight || document.documentElement.clientHeight;
+          const shown = e.intersectionRect.height;
+          const ofElement = e.boundingClientRect.height ? shown / e.boundingClientRect.height : 0;
+          const ofViewport = vh ? shown / vh : 0;
+          if (Math.max(ofElement, ofViewport) < NEED) return;
+
           once.disconnect();
+          armed = true;
           const first = dSlides[0].querySelector("[data-demo]");
           const inst = first && instances[first.dataset.demo];
           if (inst && !inst.played) inst.play();
         });
-      }, { threshold: 0.3 });
+      }, { threshold: steps });
       once.observe(host);
     }
   })();
